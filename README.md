@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Collaborative Board
 
-## Getting Started
+This application is a "collaborative drawing board" designed for everyone, inspired by tools like Google Jamboard. Users can join immediately with an arbitrary nickname and start creating or collaborating on boards.
 
-First, run the development server:
+## [Live Demo](I will added it later)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Please click on the link above to see the deployed app.
+
+## Features
+
+- Material UI for a modern and responsive user interface.
+- **Board Management:**
+  - Create new boards.
+  - Join existing boards.
+  - View a list of all available boards.
+- **Real-Time Collaboration:**
+  - Live updates from multiple users.
+  - Display of live cursors for other users.
+  - Changes are saved automatically.
+  - Undo and redo functionality using Ctrl + Z and Ctrl + Y.
+- **User Information:**
+  - Display of users when there are more than 1 in the room.
+- **Drawing and Editing:**
+  - Support for freehand drawing, shapes, text, and drag-and-drop objects.
+  - Editable objects: move, scale, and delete.
+  - Full-Window View to maximize drawing space.
+
+## Installing
+
+1. Clone the repository
+2. Install dependencies. Run the next command in the root folder of this app.
+
+```
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Create a Liveblocks account and add your environment variables. Copy the variables from `.env.example` to a new file called `.env.local` and update them with your Liveblocks credentials.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+4. Run the app. In the same path where you installed the dependencies run the next command to run the app in dev mode.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```
+npm run dev
+```
 
-## Learn More
+## [Video](I will add the video later)
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Click on the link above to see a video on how the app works.

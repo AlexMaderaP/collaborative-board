@@ -1,95 +1,72 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
 
-export default function Home() {
+import NewUsername from "@/components/home/NewUsername";
+import { Box, Button, TextField, Typography } from "@mui/material";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import HomeNavBar from "@/components/home/HomeNavBar";
+import RoomList from "@/components/home/RoomList";
+import { useUser } from "@/context/useUser";
+
+function Page() {
+  const { user, setUser } = useUser();
+  const [open, setOpen] = useState(user === "");
+  const [roomName, setRoomName] = useState("");
+  const router = useRouter();
+
+  const handleCreateRoom = () => {
+    const newRoomName = roomName.trim().replace(/\s+/g, "-");
+    if (newRoomName !== "") {
+      router.push(`/room/${newRoomName}`);
+    }
+  };
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <>
+      <HomeNavBar user={user} />
+      <Box
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        gap={4}
+        p={2}
+        sx={{ width: "100%" }}
+      >
+        <Box>
+          <Typography variant="h3">Create Your Own Room</Typography>
+          <Box
+            component="form"
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleCreateRoom();
+            }}
+            sx={{ display: "flex", justifyContent: "center", mt: 2 }}
           >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
+            <TextField
+              label="Room Name"
+              required
+              variant="outlined"
+              value={roomName}
+              onChange={(e) => setRoomName(e.target.value)}
+              sx={{ marginRight: 2 }}
             />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+            <Button variant="contained" color="primary" type="submit">
+              Create
+            </Button>
+          </Box>
+        </Box>
+        <Box textAlign="center">
+          <Typography variant="h3">Join an Existing Room</Typography>
+          <RoomList />
+        </Box>
+      </Box>
+      <NewUsername
+        open={open}
+        onClose={() => setOpen(false)}
+        setUser={setUser}
+      />
+    </>
   );
 }
+
+export default Page;
